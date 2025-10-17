@@ -1,0 +1,56 @@
+package tests;
+
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import config.MainConfig;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import helpers.Attach;
+
+import java.util.Map;
+
+import static com.codeborne.selenide.Selenide.*;
+
+public class TestBase {
+
+    @BeforeAll
+    static void setupConfig() {
+
+        MainConfig mainConfig = ConfigFactory.create(MainConfig.class, System.getProperties());
+
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.baseUrl = "https://job.mtsbank.ru";
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
+        Configuration.browserSize = System.getProperty("browserSize", mainConfig.browserSize());
+        Configuration.remote = System.getProperty("remoteUrl", mainConfig.remoteUrl());
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
+    }
+
+    @BeforeEach
+    void beforeEachTest() {
+        open("/it");
+        clearBrowserCookies();
+        clearBrowserLocalStorage();
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
+
+    @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+        closeWebDriver();
+    }
+}
