@@ -2,7 +2,6 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import config.MainConfig;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -20,14 +19,12 @@ public class TestBase {
     @BeforeAll
     static void setupConfig() {
 
-        MainConfig mainConfig = ConfigFactory.create(MainConfig.class, System.getProperties());
-
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://job.mtsbank.ru";
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
-        Configuration.browserSize = System.getProperty("browserSize", mainConfig.browserSize());
-        Configuration.remote = System.getProperty("remoteUrl", mainConfig.remoteUrl());
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.remote = System.getProperty("remoteUrl", "");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
