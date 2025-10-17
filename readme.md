@@ -140,25 +140,25 @@ src/test/java/
 ```
 
 ## <img width="4%" style="vertical-align:middle" title="Jenkins" src="images/logo/Jenkins.svg"> Сборка в Jenkins
-[Сборка в Jenkins](https://jenkins.autotests.cloud/job/001-a-efremova-lesson14/10/)
+[Сборка в Jenkins](https://jenkins.autotests.cloud/job/ui-mts-job-tests/2/)
 <p align="center">
     <img title="Jenkins Build" src="images/BuildJenkins.png">
 </p>
 
 ## <img width="4%" style="vertical-align:middle" title="Allure Report" src="images/logo/AllureReport.png"> Allure-отчет
-[Allure отчет](https://jenkins.autotests.cloud/job/001-a-efremova-lesson14/10/allure/)
+[Allure отчет](https://jenkins.autotests.cloud/job/ui-mts-job-tests/2/allure/)
 <p align="center">
     <img title="Allure Overview" src="images/AllureJenkins.png">
 </p>
 
 ## <img width="4%" style="vertical-align:middle" title="Allure Report" src="images/logo/Allure.png"> Интеграция с TestOps
-[Интеграция с TestOps](https://allure.autotests.cloud/project/4910/dashboards)
+[Интеграция с TestOps](https://allure.autotests.cloud/project/4958/dashboards)
 <p align="center">
     <img title="Allure Overview" src="images/TestOpsDashboards.png">
 </p>
 
 ## <img width="4%" style="vertical-align:middle" title="Allure Report" src="images/logo/Jira.png"> Интеграция с Jira
-[Интеграция с Jira](https://jira.autotests.cloud/browse/HOMEWORK-1497)
+[Интеграция с Jira](https://jira.autotests.cloud/browse/HOMEWORK-1516)
 <p align="center">
     <img title="Jira Integration" src="images/JiraTask.png">
 </p>
