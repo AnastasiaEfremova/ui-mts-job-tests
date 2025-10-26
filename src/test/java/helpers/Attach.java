@@ -33,21 +33,17 @@ public class Attach {
     }
 
     public static void browserConsoleLogs() {
-        // Проверяем тип браузера перед получением логов
         if (WebDriverRunner.getWebDriver() instanceof ChromeDriver) {
-            // Логи доступны только для Chrome
             attachAsText(
                     "Browser console logs",
                     String.join("\n", Selenide.getWebDriverLogs(BROWSER))
             );
         } else if (WebDriverRunner.getWebDriver() instanceof FirefoxDriver) {
-            // Для Firefox возвращаем сообщение о неподдержке
             attachAsText(
                     "Browser console logs",
                     "Console logs are not supported for Firefox browser"
             );
         } else {
-            // Для других браузеров
             attachAsText(
                     "Browser console logs",
                     "Console logs are not available for this browser type"

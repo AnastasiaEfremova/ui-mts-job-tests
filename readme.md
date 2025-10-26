@@ -57,8 +57,6 @@ src/test/java/
 │   ├── CityConfirmComponent.java
 │   ├── CookieNoticeComponent.java
 │   └── SearchComponent.java
-├── config/                  # Конфигурация
-│   └── MainConfig.java
 ├── helpers/                 # Вспомогательные классы
 │   └── Attach.java          # Вложения для отчетов
 ├── pages/                   # Page Object модели

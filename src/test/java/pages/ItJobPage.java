@@ -17,8 +17,8 @@ public class ItJobPage {
     private final SearchComponent searchComponent = new SearchComponent();
 
     private final SelenideElement locationButton = $(".LocationButton_locationButton_text__UFX5G");
-    private final String acceptCookieText = "принять cookie";
-    private final String configureCookieText = "настроить cookie";
+    private final static String ACCEPT_COOKIE_TEXT = "принять cookie";
+    private final static String CONFIGURE_COOKIE_TEXT = "настроить cookie";
 
     @Step("Принять cookies")
     public ItJobPage acceptCookies() {
@@ -46,7 +46,7 @@ public class ItJobPage {
 
     @Step("Проверить текст кнопок cookie баннера")
     public void verifyCookieButtonsText() {
-        cookieNoticeComponent.shouldHaveButtonsText(acceptCookieText, configureCookieText);
+        cookieNoticeComponent.shouldHaveButtonsText(ACCEPT_COOKIE_TEXT, CONFIGURE_COOKIE_TEXT);
     }
 
     @Step("Проверить кликабельность кнопок cookie")
@@ -85,24 +85,8 @@ public class ItJobPage {
     }
 
     @Step("Выполнить поиск вакансии: {query}")
-    public ItJobPage searchVacancy(String query) {
-        searchComponent.searchVacancy(query);
-        return this;
-    }
-
-    @Step("Проверить что найдены вакансии")
-    public void verifyVacanciesFound() {
-        searchComponent.verifyVacanciesFound();
-    }
-
-    @Step("Проверить что вакансии не найдены")
-    public void verifyNoVacanciesFound() {
-        searchComponent.verifyNoVacanciesFound();
-    }
-
-    @Step("Проверить отображение результатов поиска")
-    public void verifySearchResultsVisible() {
-        searchComponent.searchResultsShouldBeVisible();
+    public SearchResultsPage searchVacancy(String query) {
+        return searchComponent.searchVacancy(query);
     }
 
     @Step("Обновить страницу")
@@ -111,6 +95,7 @@ public class ItJobPage {
         return this;
     }
 
+    @Step("Получить компонент поиска")
     public SearchComponent search() {
         return searchComponent;
     }

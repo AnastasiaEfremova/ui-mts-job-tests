@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import pages.ItJobPage;
+import pages.SearchResultsPage;
 import tests.TestBase;
 import utils.FakerTestData;
 
@@ -19,6 +20,10 @@ import utils.FakerTestData;
 public class SearchTests extends TestBase {
 
     private final ItJobPage itJobPage = new ItJobPage();
+    private SearchResultsPage resultsPage = new SearchResultsPage();
+
+    private static final String NULL_TEXT = "null";
+    private static final String LONG_TEXT = "Очень длинный поисковый запрос который содержит много слов и должен быть обработан системой поиска вакансий";
 
     @BeforeEach
     void acceptCookies() {
@@ -37,8 +42,8 @@ public class SearchTests extends TestBase {
     @Story("Успешный поиск вакансий")
     @Severity(SeverityLevel.CRITICAL)
     void successSearchVacationTest(String vacancy) {
-        itJobPage.searchVacancy(vacancy)
-                .verifyVacanciesFound();
+        resultsPage = itJobPage.searchVacancy(vacancy);
+        resultsPage.verifyVacanciesFound();
     }
 
     @Test
@@ -47,8 +52,8 @@ public class SearchTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     void searchRandomJobTest() {
         String randomJob = FakerTestData.getRandomJobTitle();
-        itJobPage.searchVacancy(randomJob)
-                .verifyVacanciesFound();
+        resultsPage = itJobPage.searchVacancy(randomJob);
+        resultsPage.verifyVacanciesFound();
     }
 
     @Test
@@ -56,8 +61,8 @@ public class SearchTests extends TestBase {
     @Story("Поиск несуществующих вакансий")
     @Severity(SeverityLevel.NORMAL)
     void noVacanciesFoundTest() {
-        itJobPage.searchVacancy("null")
-                .verifyNoVacanciesFound();
+        resultsPage = itJobPage.searchVacancy(NULL_TEXT);
+        resultsPage.verifyNoVacanciesFound();
     }
 
     @Test
@@ -65,9 +70,8 @@ public class SearchTests extends TestBase {
     @Story("Обработка длинных поисковых запросов")
     @Severity(SeverityLevel.MINOR)
     void searchWithLongQueryTest() {
-        String longQuery = "Очень длинный поисковый запрос который содержит много слов и должен быть обработан системой поиска вакансий";
-        itJobPage.searchVacancy(longQuery)
-                .verifySearchResultsVisible();
+        resultsPage = itJobPage.searchVacancy(LONG_TEXT);
+        resultsPage.verifySearchResultsVisible();
     }
 
     @Test

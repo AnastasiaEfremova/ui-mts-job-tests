@@ -17,6 +17,9 @@ public class IntegrationTests extends TestBase {
 
     private final ItJobPage itJobPage = new ItJobPage();
 
+    private static final String DEFAULT_HEADER_CITY = "Москва";
+    private static final String KAZAN_CITY = "Казань";
+
     @Test
     @DisplayName("Принятие cookies и подтверждение города по дефолту")
     @Story("Полный поток работы с интерфейсом")
@@ -27,7 +30,7 @@ public class IntegrationTests extends TestBase {
                 .verifyCookieBannerNotVisible()
                 .verifyAllCityBannerElements()
                 .acceptDefaultCity()
-                .verifyCityInHeader("Москва");
+                .verifyCityInHeader(DEFAULT_HEADER_CITY);
     }
 
     @Test
@@ -37,7 +40,7 @@ public class IntegrationTests extends TestBase {
     void configureCookiesAndChooseCityTest() {
         itJobPage.configureCookies()
                 .verifyCookieBannerNotVisible()
-                .chooseCity("Казань")
-                .verifyCityInHeader("Казань");
+                .chooseCity(KAZAN_CITY)
+                .verifyCityInHeader(KAZAN_CITY);
     }
 }
